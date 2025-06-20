@@ -781,7 +781,12 @@ function createSlider(containerId, dotsId, intervalTime = 5000) {
 
   function showSlide() {
     slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === currentIndex);
+      slide.classList.remove("active", "prev");
+      if (i === currentIndex) {
+        slide.classList.add("active");
+      } else if (i === (currentIndex - 1 + slides.length) % slides.length) {
+        slide.classList.add("prev");
+      }
     });
     dots.forEach(dot => dot.classList.remove("active"));
     if (dots[currentIndex]) dots[currentIndex].classList.add("active");
